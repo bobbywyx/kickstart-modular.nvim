@@ -211,7 +211,27 @@ return {
         clangd = {},
         -- gopls = {},
         pyright = {},
-        -- rust_analyzer = {},
+        rust_analyzer = {
+          cmd = { vim.fn.expand '~/.cargo/bin/rust-analyzer' },
+          settings = {
+            ['rust-analyzer'] = {
+              checkOnSave = { command = 'clippy' },
+              completion = {
+                postfix = { enable = true },
+                autoimport = { enable = true },
+              },
+              diagnostics = {
+                enable = true,
+                experimental = { enable = true },
+              },
+              cargo = {
+                allFeatures = true,
+                loadOutDirsFromCheck = true,
+              },
+              procMacro = { enable = true },
+            },
+          },
+        },
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
